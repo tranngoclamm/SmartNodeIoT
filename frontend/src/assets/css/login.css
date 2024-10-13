@@ -217,6 +217,10 @@ h1 small,h2 small,h3 small,h1 .small,h2 .small,h3 .small{
     background-color:#05ae0e;
     border-color:#05ae0e
 }
+.btn-register.btn-fill {
+    background-color: #008cffc9;
+    border-color: #008cffc9;
+}
 .btn-warning.btn-fill{
     background-color:#ff9500;
     border-color:#ff9500
