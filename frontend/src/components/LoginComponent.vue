@@ -1,0 +1,123 @@
+<template>
+  <body class="landing-page landing-page2" spellcheck="false" style="user-select: none;">
+    <nav class="navbar navbar-transparent navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div>
+  
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <img src="@/assets/images/flags/US.png" />
+                English(US)
+                <b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                <li>
+                  <a href="#"><img src="@/assets/images/flags/DE.png" /> Việt Nam</a>
+                </li>
+                <li>
+                  <a href="#"><img src="@/assets/images/flags/GB.png" /> English(UK)</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li>
+              <a href="#">
+                Register
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                Contact
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="main">
+      <video id="video_background" preload="auto" autoplay="true" loop="loop" muted="muted" volume="0" style="z-index: 1; position: fixed; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
+        <source src="@/assets/videos/time.webm" type="video/webm" />
+        <source src="@/assets/videos/time.mp4" type="video/mp4" />
+        Video not supported
+      </video>
+      <div class="cover black" data-color="black"></div>
+  
+      <div class="container">
+        <h1 class="logo cursive" style="letter-spacing: 4px;">
+          SmartNodeIot
+        </h1>
+        <div class="content">
+          <div class="content">
+            <div class="container">
+              <div class="row">
+                <div class="col-md-4 text-white col-sm-6 col-md-offset-4 col-sm-offset-3">
+                  <form method="#" action="/login">
+                    <div data-background="color" data-color="blue" class="card">
+                      <div class="card-content">
+                        <div class="form-group">
+                          <label class="btn-fill ">Email </label> 
+                          <input type="email" class="form-control transparent" placeholder="" />
+                        </div>
+                        <div class="form-group">
+                          <label class="btn-fill ">Password </label> 
+                          <input type="email" class="form-control transparent" placeholder="" />
+                        </div>
+                      </div>
+                      <div class="card-footer text-center" style="display: flex; align-items: center;justify-content: space-between;">
+                        <div class="forgot btn-fill">
+                          <a href="/forgot-password" class=" btn-fill">
+                            Forgot your password?
+                          </a>
+                        </div>
+                        <button type="submit" class="btn btn-warning btn-fill">Let's go</button>
+                      </div>
+                      <div class="text-center btn-fill">
+                        <div class="line-container">
+                            <hr class="line">
+                            <span class="line-text">OR</span>
+                            <hr class="line">
+                        </div>
+                      </div>
+                      <div class="subscribe text-center">
+                        <h5 class="info-text">
+                          <a href="#" class=" btn-fill ">
+                            <i class="fa fa-google-plus-square" style="margin-right: 5px;"></i>
+                            Login with Google
+                          </a>
+                        </h5>
+              
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer">
+        <div class="container">Made with <i class="fa fa-heart heart"></i> by <a href="https://github.com/tranngoclamm/">LamTN</a>. For more detail <a href="https://github.com/tranngoclamm/">here.</a></div>
+      </div>
+    </div>
+  </body>
+  
+</template>
+  <script>
+  import '@/assets/css/bootstrap.css';
+  import '@/assets/css/login.css'; 
+
+  export default {
+    name: "LoginComponent",
+  };
+  </script>
+  
