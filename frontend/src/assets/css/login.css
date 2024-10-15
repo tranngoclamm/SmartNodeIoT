@@ -316,6 +316,39 @@ h1 small,h2 small,h3 small,h1 .small,h2 .small,h3 .small{
     --bs-card-bg: none !important;
     --bs-card-border-color: none !important;
 }
+.card-transparent {
+    border-radius: 4px;
+    background-color: #fff;
+    margin-bottom: 30px;
+    background-color: transparent;
+}
+.form-control.transparent {
+    font-size: 15px;
+    background-color: rgba(255, 255, 255, .07);
+    border: 1px solid rgba(238, 238, 238, .27);
+    color: #fff;
+}   
+.navbar .navbar-nav .dropdown-toggle:after {
+    display: none !important;
+
+}
+.btn-warning.btn-fill,
+.btn.btn-info.btn-fill {
+    font-size: 13px !important;
+    border:none;
+    outline: none;
+}
+.card-footer-transparent {
+    padding: .75rem 1.25rem;
+    background-color: none;
+    border-top: none;
+}
+.form-control.transparent:focus {
+    background-color: transparent;
+    border-color: #fff;
+    color: white;
+    font-size: 16px;
+}
 .navbar{
     border:0;
     transition:all .4s;
@@ -614,6 +647,7 @@ h1 small,h2 small,h3 small,h1 .small,h2 .small,h3 .small{
         background-color:#434343
     }
 }
+
 .modal-backdrop.in{
     opacity:.25
 }
@@ -767,6 +801,7 @@ a{
     z-index: 4;
     text-align: center; /* Căn giữa nội dung */
     margin-top: 50px;
+    background-color: transparent !important;
 }
 
 .footer a{

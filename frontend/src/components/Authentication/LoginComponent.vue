@@ -31,8 +31,8 @@
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <li>
-              <a href="/login">
-                Login
+              <a href="/register">
+                Register
               </a>
             </li>
             <li>
@@ -53,7 +53,7 @@
       <div class="cover black" data-color="black"></div>
   
       <div class="container">
-        <h1 class="logo cursive" style="letter-spacing: 4px; margin-top: 90px">
+        <h1 class="logo cursive" style="letter-spacing: 4px;">
           SmartNodeIot
         </h1>
         <div class="content">
@@ -61,13 +61,9 @@
             <div class="container">
               <div class="row">
                 <div class="col-md-4 text-white col-sm-6 col-md-offset-4 col-sm-offset-3">
-                  <form method="post" action="/register">
-                    <div data-background="color" data-color="blue" class="card">
+                  <form method="#" action="/login">
+                    <div data-background="color" data-color="blue" class="card-transparent">
                       <div class="card-content">
-                        <div class="form-group">
-                          <label class="btn-fill ">Full Name </label> 
-                          <input type="text" class="form-control transparent" placeholder="" />
-                        </div>
                         <div class="form-group">
                           <label class="btn-fill ">Email </label> 
                           <input type="email" class="form-control transparent" placeholder="" />
@@ -76,18 +72,30 @@
                           <label class="btn-fill ">Password </label> 
                           <input type="password" class="form-control transparent" placeholder="" />
                         </div>
-                        <div class="form-group">
-                          <label class="btn-fill ">Confirm Password </label> 
-                          <input type="password" class="form-control transparent" placeholder="" />
-                        </div>
                       </div>
                       <div class="card-footer text-center" style="display: flex; align-items: center;justify-content: space-between;">
                         <div class="forgot btn-fill">
-                          <a href="/login" class=" btn-fill">
-                            Have an Account? 
+                          <a href="/forgot-password" class=" btn-fill">
+                            Forgot your password?
                           </a>
                         </div>
-                        <button type="submit" class="btn btn-info btn-fill">Register</button>
+                        <button type="submit" class="btn btn-warning btn-fill">Let's go</button>
+                      </div>
+                      <div class="text-center btn-fill">
+                        <div class="line-container">
+                            <hr class="line">
+                            <span class="line-text">OR</span>
+                            <hr class="line">
+                        </div>
+                      </div>
+                      <div class="subscribe text-center">
+                        <h5 class="info-text">
+                          <a href="#" class=" btn-fill ">
+                            <i class="fa fa-google-plus-square" style="margin-right: 5px;"></i>
+                            Login with Google
+                          </a>
+                        </h5>
+              
                       </div>
                     </div>
                   </form>
@@ -96,6 +104,9 @@
             </div>
           </div>
         </div>
+      </div>
+      <div class="footer">
+        <div class="container">Made with <i class="fa fa-heart heart"></i> by <a href="https://github.com/tranngoclamm/">LamTN</a>. For more detail <a href="https://github.com/tranngoclamm/">here.</a></div>
       </div>
     </div>
   </body>
@@ -106,7 +117,7 @@
   import '@/assets/css/login.css'; 
 
   export default {
-    name: "RegisterComponent",
+    name: "LoginComponent",
   };
   </script>
   
