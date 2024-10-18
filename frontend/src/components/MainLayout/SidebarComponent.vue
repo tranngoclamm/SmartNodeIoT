@@ -9,40 +9,40 @@
           </div>
           <ul class="nav">
             <li class="router-link-exact-active nav-item active">
-              <a href="#/admin/overview" class="nav-link">
+              <router-link to="/dashboard" class="nav-link">
                 <i class="nc-icon nc-chart-pie-35"></i>
                 <p>Dashboard</p>
-              </a>
+              </router-link>
             </li>
-            <li class="">
-              <a href="#/admin/user" class="nav-link">
+            <li>
+              <router-link to="/developer" class="nav-link">
                 <i class="nc-icon nc-settings-90"></i>
                 <p>Developer Zone</p>
-              </a>
+              </router-link>
             </li>
-            <li class="">
-              <a href="#/admin/typography" class="nav-link">
+            <li>
+              <router-link to="/user" class="nav-link">
                 <i class="nc-icon nc-single-02"></i>
                 <p>Users</p>
-              </a>
+              </router-link>
             </li>
-            <li class="">
-              <a href="#/admin/maps" class="nav-link">
+            <li>
+              <router-link to="/map" class="nav-link">
                 <i class="nc-icon nc-pin-3"></i>
                 <p>Maps</p>
-              </a>
+              </router-link>
             </li>
-            <li class="">
-              <a href="#/admin/maps" class="nav-link">
+            <li>
+              <router-link to="/history" class="nav-link">
                 <i class="nc-icon nc-paper-2"></i>
                 <p>History</p>
-              </a>
+              </router-link>
             </li>
-            <li class="">
-              <a href="#/admin/maps" class="nav-link">
+            <li>
+              <router-link to="/setting" class="nav-link">
                 <i class="nc-icon nc-settings-gear-64"></i>
                 <p>Settings</p>
-              </a>
+              </router-link>
             </li>
             <!-- <li class="">
               <a href="#/admin/notifications" class="nav-link">
