@@ -7904,7 +7904,10 @@ button:focus {
     padding-bottom:5px;
     border-top:none!important;
     border-bottom:none;
-    text-align:left!important
+    text-align:center!important
+}
+.tfly-1{
+    transform: translateY(-1px);
 }
 .table .td-actions .btn{
     opacity:.36;
@@ -8737,7 +8740,27 @@ button:focus {
   display: flex;
   align-items: center;
 }
-
+.outline-none{
+    border: none;
+    outline: none;
+}
+.btn-add-user{
+    color: #686868;
+    font-weight: 600;
+}
+.td-actions .btn-link{
+    font-size: 14px;
+    opacity: 1;
+}
+.table .td-actions .btn {
+    opacity: 0.6;
+}
+.text-center{
+    text-align: center !important;
+}
+.fa-add-user{
+    transform: translateY(-2px);
+}
 .form-switch input {
   appearance: none;
   -webkit-appearance: none;

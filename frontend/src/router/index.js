@@ -5,6 +5,7 @@ import RegisterComponent from '@/components/Authentication/RegisterComponent.vue
 import MainLayout from '@/components/MainLayout/MainLayout.vue';
 import DashboardComponent from '@/components/MainLayout/MainContent/DashboardComponent.vue';
 import GoogleMap from '@/components/MainLayout/MainContent/GoogleMap.vue';
+import UserComponent from '@/components/MainLayout/MainContent/UserComponent.vue';
 
 const routes = [
   {
@@ -24,6 +25,16 @@ const routes = [
       {
         path: '',
         component: DashboardComponent,
+      },
+    ],
+  },
+  {
+    path: '/user',
+    component: MainLayout,
+    children: [
+      {
+        path: '',
+        component: UserComponent,
       },
     ],
   },
