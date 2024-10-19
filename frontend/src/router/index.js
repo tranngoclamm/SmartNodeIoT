@@ -6,6 +6,8 @@ import MainLayout from '@/components/MainLayout/MainLayout.vue';
 import DashboardComponent from '@/components/MainLayout/MainContent/DashboardComponent.vue';
 import GoogleMap from '@/components/MainLayout/MainContent/GoogleMap.vue';
 import UserComponent from '@/components/MainLayout/MainContent/UserComponent.vue';
+import UserProfileComponent from '@/components/MainLayout/MainContent/UserProfile.vue';
+import TableList from '@/components/MainLayout/MainContent/TableList.vue';
 
 const routes = [
   {
@@ -35,6 +37,26 @@ const routes = [
       {
         path: '',
         component: UserComponent,
+      },
+    ],
+  },
+  {
+    path: '/user-1',
+    component: MainLayout,
+    children: [
+      {
+        path: '',
+        component: TableList,
+      },
+    ],
+  },
+  {
+    path: '/user-profile',
+    component: MainLayout,
+    children: [
+      {
+        path: '',
+        component: UserProfileComponent,
       },
     ],
   },

@@ -10744,10 +10744,32 @@ a.social-count.no-count:before{
     width: 100%;
     color: #aaa;
     z-index: 4;
-    margin-top: 50px;
+    /* margin-top: 50px; */
 }
 .nc-icon-img{
     width: 42px;
     height: 42px;
 }
-
+.card-user .author {
+    /* margin-top: 0px; */
+}
+.image .cover_photo{
+    box-sizing: border-box;
+    height: 160px;
+    width: 100%;
+    object-fit: cover;
+}
+.user-profile h5{
+    margin-bottom: 0px;
+}
+.card.card-user{
+    margin-bottom: 0px;
+}
+.card.card-user input,
+.card.card-user textarea{
+    font-size: 13px;
+    color: #868686;
+}
+.card.card-user .btn.btn-primary{
+    font-size: 13px;
+}

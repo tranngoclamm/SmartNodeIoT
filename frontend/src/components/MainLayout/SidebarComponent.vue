@@ -2,9 +2,11 @@
     <div data-color="black" data-image="@/assets/images/sidebar-4.jpg" class="sidebar" :style="{backgroundImage: `url(${require('@/assets/images/sidebar-4.jpg')})` }">
         <div class="sidebar-wrapper">
           <div class="logo">
-            <a href="#" class="simple-text">
-              <img class="logo-img" src="@/assets/images/avatar-mac-dinh-1.jpg" alt="">
-              Nguyễn Văn Hoàng
+            <a href="#" class="simple-text" >
+              <router-link to="/user-profile" style="color: white !important;">
+                <img class="logo-img" src="@/assets/images/avatar-mac-dinh-1.jpg" alt="">
+                Nguyễn Văn Hoàng
+              </router-link>
             </a>
           </div>
           <ul class="nav">
