@@ -10773,3 +10773,40 @@ a.social-count.no-count:before{
 .card.card-user .btn.btn-primary{
     font-size: 13px;
 }
+.history-wrapper{
+    background-color: white;
+    padding-top: 15px !important;
+}
+.history-wrapper.table>thead>tr>th {
+    text-align: left !important;
+}
+.history-wrapper input#datePicker{
+    border: none;
+    margin-left: 4px;
+}
+.content {
+    /* background-color: white; */
+}
+.history-wrapper .header-wrapper{
+    /* margin-bottom: 5px; */
+}
+.fa.excel-icon{
+    margin-right: 4px;
+    transform: translateY(-1px);
+}
+  
+  /* Khi ở điện thoại (kích thước màn hình nhỏ hơn 600px) */
+  @media (max-width: 600px) {
+    .chart-container {
+      width: 100%; /* Làm cho biểu đồ rộng hơn màn hình điện thoại */
+      overflow-x: scroll; /* Thêm khả năng cuộn ngang */
+    }
+  
+    canvas {
+      width: 100%; /* Đảm bảo biểu đồ bao phủ toàn bộ chiều rộng của container */
+    }
+    .chart{
+        overflow-x: scroll;
+    }
+  }
+  

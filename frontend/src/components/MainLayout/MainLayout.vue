@@ -3,9 +3,7 @@
       <SidebarComponent />
       <div class="main-panel">
         <NavbarComponent />
-        <div class="content">
-          <router-view />
-        </div>
+        <router-view />
         <FooterComponent />
       </div>
     </div>

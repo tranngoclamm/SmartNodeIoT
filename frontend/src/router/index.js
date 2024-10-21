@@ -7,7 +7,7 @@ import DashboardComponent from '@/components/MainLayout/MainContent/DashboardCom
 import GoogleMap from '@/components/MainLayout/MainContent/GoogleMap.vue';
 import UserComponent from '@/components/MainLayout/MainContent/UserComponent.vue';
 import UserProfileComponent from '@/components/MainLayout/MainContent/UserProfile.vue';
-import TableList from '@/components/MainLayout/MainContent/TableList.vue';
+import HistoryComponent from '@/components/MainLayout/MainContent/HistoryComponent.vue';
 
 const routes = [
   {
@@ -41,12 +41,12 @@ const routes = [
     ],
   },
   {
-    path: '/user-1',
+    path: '/history',
     component: MainLayout,
     children: [
       {
         path: '',
-        component: TableList,
+        component: HistoryComponent,
       },
     ],
   },
