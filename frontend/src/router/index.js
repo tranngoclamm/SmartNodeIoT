@@ -8,6 +8,7 @@ import GoogleMap from '@/components/MainLayout/MainContent/GoogleMap.vue';
 import UserComponent from '@/components/MainLayout/MainContent/UserComponent.vue';
 import UserProfileComponent from '@/components/MainLayout/MainContent/UserProfile.vue';
 import HistoryComponent from '@/components/MainLayout/MainContent/HistoryComponent.vue';
+import SettingComponent from '@/components/MainLayout/MainContent/SettingComponent.vue';
 
 const routes = [
   {
@@ -67,6 +68,16 @@ const routes = [
       {
         path: '',
         component: GoogleMap,
+      },
+    ],
+  },
+  {
+    path: '/setting',
+    component: MainLayout,
+    children: [
+      {
+        path: '',
+        component: SettingComponent,
       },
     ],
   },

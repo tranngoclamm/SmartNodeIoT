@@ -10808,5 +10808,19 @@ a.social-count.no-count:before{
     .chart{
         overflow-x: scroll;
     }
+    .setting-wrapper .card-body .row > div{
+        padding: 0px 15px !important;
+    }
   }
-  
+.setting-wrapper{
+    user-select: none;
+}
+.setting-wrapper select.form-control:not([size]):not([multiple]) {
+    height: 40px;
+    font-size: 13px;
+}
+.setting-wrapper p.form-control{
+    font-size: 13px;
+    color: #9a9a9a;
+    padding-left: 4px;
+}
