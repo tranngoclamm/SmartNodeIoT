@@ -6,6 +6,8 @@ import MainLayout from '@/components/MainLayout/MainLayout.vue';
 import DashboardComponent from '@/components/MainLayout/MainContent/DashboardComponent.vue';
 import GoogleMap from '@/components/MainLayout/MainContent/GoogleMap.vue';
 import UserComponent from '@/components/MainLayout/MainContent/UserComponent.vue';
+import DeveloperComponent from '@/components/MainLayout/MainContent/DeveloperComponent.vue';
+import DeveloperHomeComponent from '@/components/MainLayout/MainContent/DeveloperContent/HomeContent.vue';
 import UserProfileComponent from '@/components/MainLayout/MainContent/UserProfile.vue';
 import HistoryComponent from '@/components/MainLayout/MainContent/HistoryComponent.vue';
 import SettingComponent from '@/components/MainLayout/MainContent/SettingComponent.vue';
@@ -22,6 +24,16 @@ const routes = [
     component: RegisterComponent
   },
   {
+    path: '/user-profile',
+    component: MainLayout,
+    children: [
+      {
+        path: '',
+        component: UserProfileComponent,
+      },
+    ],
+  },
+  {
     path: '/dashboard',
     component: MainLayout,
     children: [
@@ -31,6 +43,33 @@ const routes = [
       },
     ],
   },
+  {
+    path: '/developer',
+    component: MainLayout,
+    children: [
+      {
+        path: '',
+        component: DeveloperComponent,
+      },
+    ],
+  },
+  {
+    path: '/developer/home',
+    component: MainLayout,
+    children: [
+      {
+        path: '',
+        component: DeveloperComponent,
+        children: [
+          {
+            path: '',
+            component: DeveloperHomeComponent,
+          }
+        ]
+      },
+    ],
+  },
+  
   {
     path: '/user',
     component: MainLayout,
@@ -42,32 +81,22 @@ const routes = [
     ],
   },
   {
-    path: '/history',
-    component: MainLayout,
-    children: [
-      {
-        path: '',
-        component: HistoryComponent,
-      },
-    ],
-  },
-  {
-    path: '/user-profile',
-    component: MainLayout,
-    children: [
-      {
-        path: '',
-        component: UserProfileComponent,
-      },
-    ],
-  },
-  {
     path: '/map',
     component: MainLayout,
     children: [
       {
         path: '',
         component: GoogleMap,
+      },
+    ],
+  },
+  {
+    path: '/history',
+    component: MainLayout,
+    children: [
+      {
+        path: '',
+        component: HistoryComponent,
       },
     ],
   },

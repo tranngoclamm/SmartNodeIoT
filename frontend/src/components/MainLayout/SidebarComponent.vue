@@ -17,7 +17,7 @@
               </router-link>
             </li>
             <li>
-              <router-link to="/developer" class="nav-link">
+              <router-link to="/developer/home" class="nav-link">
                 <i class="nc-icon nc-settings-90"></i>
                 <p>Developer Zone</p>
               </router-link>
