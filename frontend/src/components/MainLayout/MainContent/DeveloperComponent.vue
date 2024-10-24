@@ -20,7 +20,7 @@
             <button type="button" class="btn btn-secondary outline-none"><span>Cancel</span></button>
           </div>
           <div v-show="!guideLink" class="">
-            <button type="button" class="btn btn-primary outline-none"><span>Save And Apply</span></button>
+            <button type="button" class="btn btn-primary font-bold outline-none"><span>Save And Apply</span></button>
           </div>
           <div v-show="guideLink" class="">
             <button type="button" class="btn btn-primary outline-none font-italic mr-2"><span>Quick Start</span></button>

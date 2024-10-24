@@ -8,6 +8,7 @@ import GoogleMap from '@/components/MainLayout/MainContent/GoogleMap.vue';
 import UserComponent from '@/components/MainLayout/MainContent/UserComponent.vue';
 import DeveloperComponent from '@/components/MainLayout/MainContent/DeveloperComponent.vue';
 import DeveloperHomeComponent from '@/components/MainLayout/MainContent/DeveloperContent/HomeContent.vue';
+import DeveloperDatastreamComponent from '@/components/MainLayout/MainContent/DeveloperContent/DatastreamContent.vue';
 import UserProfileComponent from '@/components/MainLayout/MainContent/UserProfile.vue';
 import HistoryComponent from '@/components/MainLayout/MainContent/HistoryComponent.vue';
 import SettingComponent from '@/components/MainLayout/MainContent/SettingComponent.vue';
@@ -44,16 +45,6 @@ const routes = [
     ],
   },
   {
-    path: '/developer',
-    component: MainLayout,
-    children: [
-      {
-        path: '',
-        component: DeveloperComponent,
-      },
-    ],
-  },
-  {
     path: '/developer/home',
     component: MainLayout,
     children: [
@@ -69,7 +60,22 @@ const routes = [
       },
     ],
   },
-  
+  {
+    path: '/developer/datastreams',
+    component: MainLayout,
+    children: [
+      {
+        path: '',
+        component: DeveloperComponent,
+        children: [
+          {
+            path: '',
+            component: DeveloperDatastreamComponent,
+          }
+        ]
+      },
+    ],
+  },
   {
     path: '/user',
     component: MainLayout,

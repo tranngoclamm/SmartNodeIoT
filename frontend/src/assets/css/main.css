@@ -10890,3 +10890,23 @@ a.social-count.no-count:before{
 .developer__home-wrapper{
     padding-top:10px;
 }
+.developer__datastream-wrapper .add-icon{
+    height: 22px;
+    width: 22px;
+    transform: translateY(-1.5px);
+}
+.developer__datastream-wrapper .btn-add-datastream{
+    font-weight: 600;
+    font-size: 13px;
+    color: #2a9dff;
+    background-color: transparent;
+}
+.developer__datastream-wrapper .color-preview-specific{
+    width: 30px; 
+    height: 30px;
+    border: 1.5px solid;
+}
+.developer__datastream-wrapper .table>thead>tr>th {
+    text-align: left !important;
+    white-space: nowrap;
+}
