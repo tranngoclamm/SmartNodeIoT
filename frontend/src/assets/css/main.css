@@ -10910,3 +10910,47 @@ a.social-count.no-count:before{
     text-align: left !important;
     white-space: nowrap;
 }
+
+.developer__notification-wrapper label{
+    white-space: nowrap;
+    font-size: 15px;
+    font-weight: 600;
+    color: #1275b7;
+    margin-left: 6px;
+    padding-left: 0px;
+}
+.developer__notification-wrapper .form-switch label{
+    font-weight: 550;
+    color: #595959;
+    margin-bottom: 0;
+    /* opacity: 0.85; */
+}
+.threshold-notification-item label{
+    color: #595959;
+    margin-right: 4px;
+    margin-left:40px;
+}
+.threshold-notification-item input{
+    width: 60px;
+    padding-left: 8px;
+    margin-right: 7px;
+    text-align: center;
+}
+.developer__notification-wrapper .choose-user-type input[type=checkbox]{
+    margin-right: 4px;
+}
+
+.developer__notification-wrapper p{
+    font-size: 14px;
+}
+.developer__notification-wrapper .form-switch input {
+    width: 38px;
+    height: 19px;
+}
+.developer__notification-wrapper .form-switch input::before {
+    width: 15px;
+    height: 15px;
+}
+.developer__notification-wrapper .form-switch input:checked::before {
+    transform: translateX(18.5px);
+}

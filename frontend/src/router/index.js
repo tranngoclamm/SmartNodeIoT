@@ -9,6 +9,7 @@ import UserComponent from '@/components/MainLayout/MainContent/UserComponent.vue
 import DeveloperComponent from '@/components/MainLayout/MainContent/DeveloperComponent.vue';
 import DeveloperHomeComponent from '@/components/MainLayout/MainContent/DeveloperContent/HomeContent.vue';
 import DeveloperDatastreamComponent from '@/components/MainLayout/MainContent/DeveloperContent/DatastreamContent.vue';
+import DeveloperNotificationComponent from '@/components/MainLayout/MainContent/DeveloperContent/NotificationContent.vue';
 import UserProfileComponent from '@/components/MainLayout/MainContent/UserProfile.vue';
 import HistoryComponent from '@/components/MainLayout/MainContent/HistoryComponent.vue';
 import SettingComponent from '@/components/MainLayout/MainContent/SettingComponent.vue';
@@ -71,6 +72,22 @@ const routes = [
           {
             path: '',
             component: DeveloperDatastreamComponent,
+          }
+        ]
+      },
+    ],
+  },
+  {
+    path: '/developer/notifications',
+    component: MainLayout,
+    children: [
+      {
+        path: '',
+        component: DeveloperComponent,
+        children: [
+          {
+            path: '',
+            component: DeveloperNotificationComponent,
           }
         ]
       },
