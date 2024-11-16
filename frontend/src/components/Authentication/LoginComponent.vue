@@ -61,16 +61,16 @@
             <div class="container">
               <div class="row">
                 <div class="col-md-4 text-white col-sm-6 col-md-offset-4 col-sm-offset-3">
-                  <form method="#" action="/login">
+                  <form @submit.prevent="handleLogin">
                     <div data-background="color" data-color="blue" class="card-transparent">
                       <div class="card-content">
                         <div class="form-group">
                           <label class="btn-fill ">Email </label> 
-                          <input type="email" class="form-control transparent" placeholder="" />
+                          <input type="email" v-model="email" class="form-control transparent" placeholder="" />
                         </div>
                         <div class="form-group">
                           <label class="btn-fill ">Password </label> 
-                          <input type="password" class="form-control transparent" placeholder="" />
+                          <input type="password" v-model="password" class="form-control transparent" placeholder="" />
                         </div>
                       </div>
                       <div class="card-footer text-center" style="display: flex; align-items: center;justify-content: space-between;">
@@ -115,9 +115,42 @@
   <script>
   import '@/assets/css/bootstrap.css';
   import '@/assets/css/login.css'; 
+  import { loginUser, 
+        // createProject
+   } from '@/services/api'; // Import API login
+  // import router from '@/router/index'; // Import Vue Router
 
   export default {
     name: "LoginComponent",
+    data() {
+    return {
+      email: "",
+      password: "",
+    };
+  },
+  methods: {
+    async handleLogin() {
+      try {
+        // const projectData = {
+        //   projectName: 'thisprojectName',
+        //   description: 'thisdescription',
+        // };
+        // const token1 = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiItT0JrOHEtWk80M2Rlam4tMlF5NiIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTczMTcwMzQ3NSwiZXhwIjoxNzMxNzA3MDc1fQ.HMeoEVwUZWIR3cdn7psz8bhKl120ed4rEK8rND4mGYw'
+        // const res = await createProject(projectData, token1); // Gọi API
+        // console.log(res)
+        // const ht = { email: this.email, password: this.password };
+        const response = await loginUser({ email: this.email, password: this.password });
+        // console.log('Response:', response.data);
+        // const response = await loginUser({ "email": this.email, "password": this.password });
+        const { token } = response.data;
+        localStorage.setItem("token", token); // Lưu token
+        this.$router.push("/dashboard"); // Chuyển hướng đến dashboard
+      } catch (error) {
+        console.error(error);
+        alert("Login failed. Please check your credentials.");
+      }
+    },
+  },
   };
   </script>
   

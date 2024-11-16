@@ -89,7 +89,11 @@
                     color: 'rgba(0, 0, 0, 0.9)',
                   }
                 }
-              }
+              },
+              maintainAspectRatio: false, // Đảm bảo tỷ lệ khung hình không thay đổi
+              aspectRatio: 1.5, // Bạn có thể tùy chỉnh tỷ lệ khung hình (ví dụ: 2:1)
+              // width: 1200, // Kích thước chiều rộng cụ thể
+              // height: 940, // Kích thước chiều cao cụ thể
             };
 
             // Khởi tạo biểu đồ mới
