@@ -19,7 +19,32 @@ const User = {
     if (!snapshot.exists()) return null;
     const userId = Object.keys(snapshot.val())[0];
     return { userId, ...snapshot.val()[userId] };
+  },
+
+  async findUserByEmailOrUsername(query) {
+    const usersSnapshot = await db.ref('users').once('value');
+    if (!usersSnapshot.exists()) return [];
+  
+    const matchedUsers = [];
+  
+    usersSnapshot.forEach((userSnapshot) => {
+      const user = userSnapshot.val();
+      // Kiểm tra nếu email hoặc fullName chứa query (không phân biệt chữ hoa/thường)
+      if (
+        (user.email && user.email.toLowerCase().includes(query.toLowerCase())) ||
+        (user.fullName && user.fullName.toLowerCase().includes(query.toLowerCase()))
+      ) {
+        matchedUsers.push({ 
+          userId: userSnapshot.key, 
+          email: user.email,
+          fullName: user.fullName
+        });
+      }
+    });
+  
+    return matchedUsers; // Trả về danh sách các user khớp
   }
+  
 };
 
 module.exports = User;

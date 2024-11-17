@@ -46,6 +46,27 @@ const authController = {
     } catch (error) {
       res.status(500).json({ message: 'Login failed', error: error.message });
     }
+  },
+
+  // API tìm kiếm người dùng
+  async findUser(req, res) {
+    try {
+      const { query } = req.body;
+
+      if (!query || query.length < 3) { // Kiểm tra query hợp lệ
+        return res.status(400).json({ message: 'Query must be at least 3 characters long' });
+      }
+
+      const users = await User.findUserByEmailOrUsername(query);
+
+      if (users.length === 0) {
+        return res.status(404).json({ message: 'No users found' });
+      }
+
+      res.status(200).json(users);
+    } catch (error) {
+      res.status(500).json({ message: 'Failed to find user', error: error.message });
+    }
   }
 };
 
