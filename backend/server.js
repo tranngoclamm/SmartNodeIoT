@@ -20,14 +20,32 @@ const PORT = 8000;
 app.use('/api/auth', authRoutes);
 app.use('/api', projectRoutes);
 
-// Middleware để xác thực JWT
-io.use((socket, next) => {
-  const token = socket.handshake.auth.token;
-  if (!token) return next(new Error('Authentication error'));
+// Middleware xác thực auth token
+io.use(async (socket, next) => {
+  const authToken = socket.handshake.auth.token;
+  if (!authToken) return next(new Error('Authentication error'));
 
   try {
-    const decoded = jwt.verify(token, 'your_jwt_secret_key');
-    socket.user = { userId: decoded.userId, role: decoded.role };
+    // Xác thực auth token
+    const projectsSnapshot = await db.ref('projects').once('value');
+    let matchedProject = null;
+
+    projectsSnapshot.forEach((projectSnapshot) => {
+      const project = projectSnapshot.val();
+      if (project.auth_token === authToken) {
+        matchedProject = { id: projectSnapshot.key, ...project };
+      }
+    });
+
+    if (!matchedProject) {
+      return next(new Error('Invalid project auth token'));
+    }
+
+    socket.project = {
+      projectId: matchedProject.id,
+      projectName: matchedProject.projectName,
+    };
+
     next();
   } catch (err) {
     next(new Error('Authentication error'));
@@ -36,74 +54,123 @@ io.use((socket, next) => {
 
 // Socket.IO logic
 io.on('connection', (socket) => {
-  console.log(`User connected: ${socket.user.userId}`);
+  console.log(`User connected to project: ${socket.project.projectName}`);
 
-  // Xử lý tham gia phòng dựa trên authToken
-  socket.on('join_project', async (authToken) => {
+  // ESP32 gửi dữ liệu sensor/device
+  socket.on('sensor_data', async ({ pin, value }) => {
     try {
-      const projectsSnapshot = await db.ref('projects').once('value');
-      let matchedProject = null;
+      const projectId = socket.project.projectId;
 
-      // Tìm project theo authToken
-      projectsSnapshot.forEach((projectSnapshot) => {
-        const project = projectSnapshot.val();
-        if (project.auth_token === authToken) {
-          matchedProject = { id: projectSnapshot.key, ...project };
-        }
-      });
+      // Tìm datastream theo pin
+      const datastreamsSnapshot = await db
+        .ref(`projects/${projectId}/datastreams`)
+        .orderByChild('pin')
+        .equalTo(pin)
+        .once('value');
 
-      if (!matchedProject) {
-        socket.emit('error', 'Invalid auth token');
+      if (!datastreamsSnapshot.exists()) {
+        socket.emit('error', `Datastream with pin ${pin} not found`);
         return;
       }
 
-      // Kiểm tra quyền
-      if (!matchedProject.members[socket.user.userId] && matchedProject.createdBy !== socket.user.userId) {
-        socket.emit('error', 'Permission denied');
-        return;
-      }
+      const datastreamKey = Object.keys(datastreamsSnapshot.val())[0];
+      const datastream = datastreamsSnapshot.val()[datastreamKey];
 
-      // Tham gia phòng dự án
-      socket.join(matchedProject.id);
-      socket.emit('joined_project', `Joined project: ${matchedProject.id}`);
-      console.log(`User ${socket.user.userId} joined project ${matchedProject.id}`);
-    } catch (err) {
-      socket.emit('error', 'Failed to join project');
-    }
-  });
-
-  // Nhận dữ liệu từ ESP32 và phát tới tất cả client
-  socket.on('sensor_data', async ({ authToken, pin, value }) => {
-    try {
-      const result = await projectModel.handleEsp32Data(authToken, pin, value); // Model xử lý dữ liệu
-      io.to(result.projectId).emit('sensor_update', {
-        datastreamId: result.datastreamId,
-        pin: result.pin,
-        value: result.value
+      // Cập nhật giá trị mới
+      await db.ref(`projects/${projectId}/datastreams/${datastreamKey}`).update({
+        lastValue: value,
       });
-      console.log(`Sensor data updated: ${result}`);
+
+      // Phát dữ liệu tới tất cả client trong phòng
+      io.to(projectId).emit('sensor_update', {
+        datastreamId: datastreamKey,
+        pin: datastream.pin,
+        value,
+        type: datastream.type,
+      });
+
+      console.log(`Updated sensor data: Pin ${pin}, Value ${value}`);
     } catch (err) {
       socket.emit('error', err.message);
     }
   });
 
-  // Xử lý yêu cầu bật/tắt thiết bị từ FE
-  socket.on('update_device', async ({ authToken, pin, value }) => {
+  // Client yêu cầu bật/tắt device
+  socket.on('update_device', async ({ pin, value }) => {
     try {
-      const result = await projectModel.updateDeviceState(authToken, pin, value); // Model cập nhật thiết bị
-      io.to(result.projectId).emit('device_update', {
-        datastreamId: result.datastreamId,
-        pin: result.pin,
-        value: result.value
+      const projectId = socket.project.projectId;
+
+      // Tìm datastream theo pin
+      const datastreamsSnapshot = await db
+        .ref(`projects/${projectId}/datastreams`)
+        .orderByChild('pin')
+        .equalTo(pin)
+        .once('value');
+
+      if (!datastreamsSnapshot.exists()) {
+        socket.emit('error', `Datastream with pin ${pin} not found`);
+        return;
+      }
+
+      const datastreamKey = Object.keys(datastreamsSnapshot.val())[0];
+      const datastream = datastreamsSnapshot.val()[datastreamKey];
+
+      if (datastream.type !== 'device') {
+        socket.emit('error', `Pin ${pin} is not a device`);
+        return;
+      }
+
+      // Cập nhật trạng thái mới
+      await db.ref(`projects/${projectId}/datastreams/${datastreamKey}`).update({
+        lastValue: value,
       });
-      console.log(`Device state updated: ${result}`);
+
+      // Phát trạng thái mới tới ESP32 và các client trong phòng
+      io.to(projectId).emit('device_update', {
+        datastreamId: datastreamKey,
+        pin: datastream.pin,
+        value,
+        type: datastream.type,
+      });
+
+      console.log(`Updated device state: Pin ${pin}, Value ${value}`);
     } catch (err) {
       socket.emit('error', err.message);
     }
   });
 
+  // ESP32 yêu cầu trạng thái hiện tại của các device
+  socket.on('get_devices', async () => {
+    try {
+      const projectId = socket.project.projectId;
+
+      // Lấy tất cả device trong project
+      const devicesSnapshot = await db
+        .ref(`projects/${projectId}/datastreams`)
+        .orderByChild('type')
+        .equalTo('device')
+        .once('value');
+
+      if (!devicesSnapshot.exists()) {
+        socket.emit('error', 'No devices found');
+        return;
+      }
+
+      const devices = [];
+      devicesSnapshot.forEach((childSnapshot) => {
+        devices.push({ id: childSnapshot.key, ...childSnapshot.val() });
+      });
+
+      socket.emit('device_states', devices);
+      console.log(`Sent devices states for project ${projectId}`);
+    } catch (err) {
+      socket.emit('error', err.message);
+    }
+  });
+
+  // Ngắt kết nối
   socket.on('disconnect', () => {
-    console.log(`User disconnected: ${socket.user.userId}`);
+    console.log(`User disconnected from project: ${socket.project.projectName}`);
   });
 });
 

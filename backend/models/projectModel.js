@@ -82,22 +82,32 @@ const Project = {
     return project;
   },
 
-  // Lấy danh sách tất cả các projects
-  async getAllProjects(userId) {
-    const snapshot = await db.ref('projects').once('value');
-    if (!snapshot.exists()) return [];
+    // Lấy tất cả project mà người dùng đã tạo hoặc là thành viên
+  async getUserProjects(userId) {
+    const projectsSnapshot = await db.ref('projects').once('value');
+    if (!projectsSnapshot.exists()) return [];
 
-    const projects = [];
-    snapshot.forEach((childSnapshot) => {
-      const project = { projectId: childSnapshot.key, ...childSnapshot.val() };
+    const userProjects = [];
 
-      // Chỉ lấy các project mà người dùng là thành viên hoặc đã tạo
-      if (project.members[userId] || project.createdBy === userId) {
-        projects.push(project);
+    projectsSnapshot.forEach((projectSnapshot) => {
+      const project = projectSnapshot.val();
+      const projectId = projectSnapshot.key;
+
+      // Kiểm tra nếu user là người tạo hoặc thành viên
+      if (project.createdBy === userId || project.members?.[userId]) {
+        userProjects.push({
+          projectId,
+          projectName: project.projectName,
+          description: project.description,
+          createdAt: project.createdAt,
+          createdBy: project.createdBy,
+          auth_token: project.auth_token,
+          members: project.members,
+        });
       }
     });
 
-    return projects;
+    return userProjects;
   },
 
   // Thêm thành viên vào project

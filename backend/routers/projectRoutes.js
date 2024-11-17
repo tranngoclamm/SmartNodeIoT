@@ -16,8 +16,8 @@ router.delete('/:projectId', authMiddleware, projectController.deleteProject);
 // Lấy thông tin project theo projectID 
 router.get('/:projectId', authMiddleware, projectController.getProjectById);
 
-// Lấy danh sách tất cả các projects mà được tạo bởi user đó hoặc user đó là thành viên 
-router.get('/projects', authMiddleware, projectController.getAllProjects);
+// Route: Lấy tất cả các project mà người dùng đã tạo hoặc là thành viên
+router.get('/projects/list', authMiddleware, projectController.getUserProjects);
 
 // Thêm thành viên vào project
 router.post('/add-member', authMiddleware, projectController.addMember);

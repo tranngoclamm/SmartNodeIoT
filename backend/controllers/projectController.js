@@ -56,17 +56,21 @@ const projectController = {
     }
   },
 
-  // Lấy danh sách tất cả các projects
-  async getAllProjects(req, res) {
-    console.log('Controller getAllProjects is called');
+    // Lấy tất cả project mà người dùng đã tạo hoặc là thành viên
+  async getUserProjects(req, res) {
     try {
-      const userId = req.user.userId;
-      console.log(userId)
-      const projects = await Project.getAllProjects(userId);
+      userId = req.user.userId;
+
+      // Lấy danh sách project từ model
+      const projects = await Project.getUserProjects(userId);
+
+      if (projects.length === 0) {
+        return res.status(404).json({ message: 'No projects found lmao' });
+      }
 
       res.status(200).json(projects);
-    } catch (error) {
-      res.status(500).json({ message: 'Failed to retrieve projects', error: error.message });
+    } catch (err) {
+      res.status(500).json({ message: 'Failed to retrieve projects', error: err.message });
     }
   },
 
