@@ -937,4 +937,18 @@ a{
     #video_background{
         display:none
     }
+    .navbar-collapse {
+        text-align: center;
+        display: flex;
+        justify-content: space-between;
+    }
+}
+@media (max-width: 991px) {
+    .navbar-transparent {
+        background-color: transparent !important;
+    }
+    .navbar.navbar-transparent.navbar-fixed-top {
+        padding: 0px;
+        padding-top: 20px;
+    }
 }

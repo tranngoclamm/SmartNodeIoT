@@ -42,7 +42,8 @@ const authController = {
       if (!isPasswordMatch) return res.status(401).json({ message: 'Invalid credentials' });
 
       const token = jwt.sign({ userId: user.userId, role: user.role }, 'your_jwt_secret_key', { expiresIn: '1h' });
-      res.json({ message: 'Login successful', token });
+      const { password: _, ...userWithoutPassword } = user;
+      res.json({ message: 'Login successful', token, user: userWithoutPassword });
     } catch (error) {
       res.status(500).json({ message: 'Login failed', error: error.message });
     }

@@ -50,4 +50,7 @@ router.get('/datastreams/device-statuses', projectController.getDeviceStatuses);
 // Cập nhật trạng thái thiết bị
 router.post('/datastreams/device/update', projectController.updateDeviceState);
 
+// Router lấy lịch sử cảm biến
+router.get('/projects/histories', projectController.getProjectHistories);
+
 module.exports = router;

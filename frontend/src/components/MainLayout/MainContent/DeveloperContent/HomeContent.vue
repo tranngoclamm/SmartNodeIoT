@@ -15,13 +15,13 @@
               <p>Copy this code for use in your Arduino source code or other IDEs.</p>
               <div class="position-relative mb-4">
                 <div class="code-content" ref="codeContent">
-                  <p>#define SMIoT_PROJECT_ID 
+                  <p>#define SMIoT_SERVER 
                     <span>"{{project_id}}"</span>
                   </p>
-                  <p>#define SMIoT_PROJECT_NAME 
+                  <p>#define SMIoT_PORT 
                     <span>"{{project_name}}"</span>
                   </p>
-                  <p>#define SMIoT_AUTH_TOKEN
+                  <p>#define SMIoT_PROJECT_TOKEN
                     <span>"{{auth_token}}"</span>
                   </p>
                 </div>
@@ -62,8 +62,8 @@ export default {
   name: 'HomeContent',
   data() {
     return {
-      project_id: 'TMPL63ujrsBY6',
-      project_name: 'Smart Greenhouse',
+      project_id: '172.20.10.13',
+      project_name: '8000',
       auth_token: 'S1Rq0-alEd67OWfGhaEXB9B3aJnvek3Y',
       copySuccess: false,
     };

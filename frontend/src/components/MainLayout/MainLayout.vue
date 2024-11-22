@@ -1,7 +1,7 @@
 <template>
     <div class="wrapper">
       <SidebarComponent />
-      <div class="main-panel">
+      <div class="main-panel" :class="{'overflow-hidden': isScrollLocked}">
         <NavbarComponent />
         <router-view />
         <FooterComponent />
@@ -19,6 +19,11 @@
 
   export default {
     name: 'MainLayout',
+    computed: {
+      isScrollLocked() {
+        return this.$store.getters.isScrollLocked;
+      },
+    },
     components: {
       SidebarComponent,
       NavbarComponent,
@@ -27,3 +32,8 @@
   };
   </script>
   
+<style scoped>
+  .overflow-hidden {
+    overflow: hidden;
+  }
+</style>

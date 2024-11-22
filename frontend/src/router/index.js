@@ -13,6 +13,8 @@ import DeveloperNotificationComponent from '@/components/MainLayout/MainContent/
 import UserProfileComponent from '@/components/MainLayout/MainContent/UserProfile.vue';
 import HistoryComponent from '@/components/MainLayout/MainContent/HistoryComponent.vue';
 import SettingComponent from '@/components/MainLayout/MainContent/SettingComponent.vue';
+import TestSocket from '@/components/TestSocket.vue';
+
 
 const routes = [
   {
@@ -132,6 +134,10 @@ const routes = [
         component: SettingComponent,
       },
     ],
+  },
+  {
+    path: '/TestSocket',
+    component: TestSocket,
   },
 ];
 

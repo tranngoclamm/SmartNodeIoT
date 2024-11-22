@@ -10711,7 +10711,10 @@ a.social-count.no-count:before{
 .footer-content a {
     color: #1dc7ea;
 }
-
+.sidebar-wrapper .logout-btn{
+    margin-top: 15px;
+    font-size: 12px;
+}
 
 .footer-content .copyright {
     color: #777;

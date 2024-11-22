@@ -3,7 +3,7 @@
     <div class="container-fluid">
       <div class="copyright text-center" style="float: center !important">
         © Coded with
-        <i class="fa fa-heart heart"></i> by <a href="https://github.com/tranngoclamm" target="_blank">LamTN</a>. Designed by <a href="https://github.com/tranngoclamm" target="_blank">LamTN</a>.
+         by <a href="https://github.com/tranngoclamm" target="_blank">LamTN</a>. Designed by <a href="https://github.com/tranngoclamm" target="_blank">LamTN</a>.
       </div>
     </div>
   </footer>

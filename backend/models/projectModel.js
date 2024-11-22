@@ -1,15 +1,6 @@
 const db = require('../config/firebaseConfig');
 const jwt = require('jsonwebtoken');
 
-const VALID_PINS = [
-  "GPIO0", "GPIO1", "GPIO2", "GPIO3", "GPIO4", "GPIO5",
-  "GPIO12", "GPIO13", "GPIO14", "GPIO15", "GPIO16", "GPIO17",
-  "GPIO18", "GPIO19", "GPIO21", "GPIO22", "GPIO23", "GPIO25",
-  "GPIO26", "GPIO27", "GPIO32", "GPIO33", "GPIO34", "GPIO35",
-  "GPIO36", "GPIO39"
-];
-
-
 const Project = {
   // Tạo mới một project
   async createProject(data) {
@@ -195,9 +186,18 @@ const Project = {
       throw new Error('Permission denied. Only admins can add datastreams.');
     }
   
-    // Kiểm tra pin có hợp lệ không
-    if (!VALID_PINS.includes(datastreamData.pin)) {
-      throw new Error(`Invalid pin: ${datastreamData.pin}. Allowed pins are: ${VALID_PINS.join(", ")}`);
+    const isValidPin = (pin) => {
+      const match = pin.match(/^V(\d{1,2})$/); // Kiểm tra chuỗi có dạng "V" + số
+      if (match) {
+        const number = parseInt(match[1], 10); // Lấy số sau "V"
+        return number >= 1 && number <= 100;  // Kiểm tra số trong phạm vi từ 1 đến 100
+      }
+      return false;
+    };
+
+    // Kiểm tra pin trong dữ liệu có hợp lệ không
+    if (!isValidPin(datastreamData.pin)) {
+      throw new Error(`Invalid pin: ${datastreamData.pin}. Allowed pins are in the range V1 to V100.`);
     }
   
     // Kiểm tra pin có trùng lặp trong project không
@@ -209,11 +209,29 @@ const Project = {
     }
   
     const newDatastreamRef = db.ref(`projects/${projectId}/datastreams`).push();
-    const datastream = {
-      ...datastreamData,
-      createdAt: new Date().toISOString(),
-      lastValue: datastreamData.type === 'sensor' ? null : 'OFF' // Cảm biến bắt đầu với null, thiết bị với trạng thái OFF
-    };
+
+    let datastream;
+    // Nếu type là sensor, thêm các trường cụ thể
+    if (datastreamData.type === 'sensor') {
+      datastream = {
+        ...datastreamData,
+        createdAt: new Date().toISOString(),
+        lastValue: datastreamData.lastValue !== undefined ? datastreamData.lastValue : 0,
+        unit: datastreamData.unit || '%',
+        mode: datastreamData.mode || 'Auto',
+        lowThreshold: datastreamData.lowThreshold || 0,  // Ngưỡng thấp
+        highThreshold: datastreamData.highThreshold || 100, // Ngưỡng cao
+        standard_value: datastreamData.standard_value || 50 // Giá trị tiêu chuẩn
+      };
+    } else {
+      // Nếu type là device, loại bỏ các trường mode, lowThreshold và highThreshold
+      datastream = {
+        ...datastreamData,
+        createdAt: new Date().toISOString(),
+        lastValue: datastreamData.lastValue || 0,
+        // Không thêm trường mode, lowThreshold và highThreshold
+      };
+    }
   
     await newDatastreamRef.set(datastream);
     return { datastreamId: newDatastreamRef.key, ...datastream };
